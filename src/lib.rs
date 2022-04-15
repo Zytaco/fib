@@ -19,7 +19,7 @@ pub fn fib<T: Fibonacci>(n: T) -> T {
 			)
 		}
 	}
-	recursive::<T>(
+	recursive(
 		n,
 		Fibonacci::zero(),
 		Fibonacci::one()
@@ -104,8 +104,21 @@ pub mod implementations {
 
 #[cfg(test)]
 mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+	use super::fib;
+
+	#[test]
+	fn zero_test() {
+		assert_eq!(fib(0), 0);
+	}
+
+	#[test]
+	fn one_test() {
+		assert_eq!(fib(1), 1);
+	}
+
+	#[test]
+	fn sequence_test() {
+		let answers = [0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, 377, 610, 987, 1597, 2584, 4181, 6765, 10946, 17711, 28657, 46368, 75025, 121393, 196418, 317811];
+		assert_eq!((0i32 ..= 28).map(|n| fib(n)).collect::<Vec<i32>>(), answers);
+	}
 }
